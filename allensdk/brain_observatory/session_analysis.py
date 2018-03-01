@@ -210,21 +210,21 @@ class SessionAnalysis(object):
 
         nwb = BrainObservatoryNwbDataSet(self.save_path)
 
-        nwb.save_analysis_dataframes(
-            ('stim_table_lsn', lsn.stim_table),
-            ('sweep_response_nm1', nm1.sweep_response),
-            ('peak', peak),
-            ('sweep_response_nm2', nm2.sweep_response),
-            ('sweep_response_lsn', lsn.sweep_response),
-            ('mean_sweep_response_lsn', lsn.mean_sweep_response))
+        # nwb.save_analysis_dataframes(
+        #     ('stim_table_lsn', lsn.stim_table),
+        #     ('sweep_response_nm1', nm1.sweep_response),
+        #     ('peak', peak),
+        #     ('sweep_response_nm2', nm2.sweep_response),
+        #     ('sweep_response_lsn', lsn.sweep_response),
+        #     ('mean_sweep_response_lsn', lsn.mean_sweep_response))
 
-        nwb.save_analysis_arrays(
-            ('receptive_field_lsn', lsn.receptive_field),
-            ('mean_response_lsn', lsn.mean_response),
-            ('binned_dx_sp', nm1.binned_dx_sp),
-            ('binned_dx_vis', nm1.binned_dx_vis),
-            ('binned_cells_sp', nm1.binned_cells_sp),
-            ('binned_cells_vis', nm1.binned_cells_vis))
+        # nwb.save_analysis_arrays(
+        #     ('receptive_field_lsn', lsn.receptive_field),
+        #     ('mean_response_lsn', lsn.mean_response),
+        #     ('binned_dx_sp', nm1.binned_dx_sp),
+        #     ('binned_dx_vis', nm1.binned_dx_vis),
+        #     ('binned_cells_sp', nm1.binned_cells_sp),
+        #     ('binned_cells_vis', nm1.binned_cells_vis))
 
         LocallySparseNoise.save_cell_index_receptive_field_analysis(lsn.cell_index_receptive_field_analysis_data, nwb, stimulus_info.LOCALLY_SPARSE_NOISE)
 
@@ -255,31 +255,31 @@ class SessionAnalysis(object):
 
         nwb = BrainObservatoryNwbDataSet(self.save_path)
 
-        nwb.save_analysis_dataframes(
-            ('stim_table_lsn4', lsn4.stim_table),
-            ('stim_table_lsn8', lsn8.stim_table),
-            ('sweep_response_nm1', nm1.sweep_response),
-            ('peak', peak),
-            ('sweep_response_nm2', nm2.sweep_response),
-            ('sweep_response_lsn4', lsn4.sweep_response),
-            ('sweep_response_lsn8', lsn8.sweep_response),
-            ('mean_sweep_response_lsn4', lsn4.mean_sweep_response),
-            ('mean_sweep_response_lsn8', lsn8.mean_sweep_response))
+        # nwb.save_analysis_dataframes(
+        #     ('stim_table_lsn4', lsn4.stim_table),
+        #     ('stim_table_lsn8', lsn8.stim_table),
+        #     ('sweep_response_nm1', nm1.sweep_response),
+        #     ('peak', peak),
+        #     ('sweep_response_nm2', nm2.sweep_response),
+        #     ('sweep_response_lsn4', lsn4.sweep_response),
+        #     ('sweep_response_lsn8', lsn8.sweep_response),
+        #     ('mean_sweep_response_lsn4', lsn4.mean_sweep_response),
+        #     ('mean_sweep_response_lsn8', lsn8.mean_sweep_response))
 
-        merge_mean_response = LocallySparseNoise.merge_mean_response(
-            lsn4.mean_response,
-            lsn8.mean_response)
+        # merge_mean_response = LocallySparseNoise.merge_mean_response(
+        #     lsn4.mean_response,
+        #     lsn8.mean_response)
 
-        nwb.save_analysis_arrays(
-            ('mean_response_lsn4', lsn4.mean_response),
-            ('mean_response_lsn8', lsn8.mean_response),
-            ('receptive_field_lsn4', lsn4.receptive_field),
-            ('receptive_field_lsn8', lsn8.receptive_field),
-            ('merge_mean_response', merge_mean_response),
-            ('binned_dx_sp', nm1.binned_dx_sp),
-            ('binned_dx_vis', nm1.binned_dx_vis),
-            ('binned_cells_sp', nm1.binned_cells_sp),
-            ('binned_cells_vis', nm1.binned_cells_vis))
+        # nwb.save_analysis_arrays(
+        #     ('mean_response_lsn4', lsn4.mean_response),
+        #     ('mean_response_lsn8', lsn8.mean_response),
+        #     ('receptive_field_lsn4', lsn4.receptive_field),
+        #     ('receptive_field_lsn8', lsn8.receptive_field),
+        #     ('merge_mean_response', merge_mean_response),
+        #     ('binned_dx_sp', nm1.binned_dx_sp),
+        #     ('binned_dx_vis', nm1.binned_dx_vis),
+        #     ('binned_cells_sp', nm1.binned_cells_sp),
+        #     ('binned_cells_vis', nm1.binned_cells_vis))
 
         LocallySparseNoise.save_cell_index_receptive_field_analysis(lsn4.cell_index_receptive_field_analysis_data, nwb, stimulus_info.LOCALLY_SPARSE_NOISE_4DEG)
         LocallySparseNoise.save_cell_index_receptive_field_analysis(lsn8.cell_index_receptive_field_analysis_data, nwb, stimulus_info.LOCALLY_SPARSE_NOISE_8DEG)
@@ -474,17 +474,18 @@ class SessionAnalysis(object):
         nm2 = NaturalMovie(self.nwb, 'natural_movie_two')
         nm1 = NaturalMovie(self.nwb, 'natural_movie_one')
         SessionAnalysis._log.info("Session C analyzed")
-        peak = multi_dataframe_merge([nm1.peak_run, nm1.peak, nm2.peak, lsn.peak])
-        self.append_metadata(peak)
+        # peak = multi_dataframe_merge([nm1.peak_run, nm1.peak, nm2.peak, lsn.peak])
+        # self.append_metadata(peak)
 
-        self.append_metrics_locally_sparse_noise(self.metrics_c['cell'], lsn)
-        self.append_metrics_natural_movie_one(self.metrics_c['cell'], nm1)
-        self.append_metrics_natural_movie_two(self.metrics_c['cell'], nm2)
-        self.append_experiment_metrics(self.metrics_c['experiment'])
-        self.metrics_c['cell']['roi_id'] = nm1.roi_id
+        # self.append_metrics_locally_sparse_noise(self.metrics_c['cell'], lsn)
+        # self.append_metrics_natural_movie_one(self.metrics_c['cell'], nm1)
+        # self.append_metrics_natural_movie_two(self.metrics_c['cell'], nm2)
+        # self.append_experiment_metrics(self.metrics_c['experiment'])
+        # self.metrics_c['cell']['roi_id'] = nm1.roi_id
 
         if save_flag:
-            self.save_session_c(lsn, nm1, nm2, peak)
+            self.save_session_c(lsn, nm1, nm2, None)
+            # self.save_session_c(lsn, nm1, nm2, peak)
 
         if plot_flag:
             cp._plot_3sc(lsn, nm1, nm2, self.save_dir)
@@ -506,26 +507,28 @@ class SessionAnalysis(object):
         lsn4 = LocallySparseNoise(self.nwb, stimulus_info.LOCALLY_SPARSE_NOISE_4DEG)
         lsn8 = LocallySparseNoise(self.nwb, stimulus_info.LOCALLY_SPARSE_NOISE_8DEG)
 
+
         nm2 = NaturalMovie(self.nwb, 'natural_movie_two')
         nm1 = NaturalMovie(self.nwb, 'natural_movie_one')
         SessionAnalysis._log.info("Session C2 analyzed")
 
-        if self.nwb.get_metadata()['targeted_structure'] == 'VISp':
-            lsn_peak = lsn4
-        else:
-            lsn_peak = lsn8
+        # if self.nwb.get_metadata()['targeted_structure'] == 'VISp':
+        #     lsn_peak = lsn4
+        # else:
+        #     lsn_peak = lsn8
 
-        peak = multi_dataframe_merge([nm1.peak_run, nm1.peak, nm2.peak, lsn_peak.peak])
-        self.append_metadata(peak)
+        # peak = multi_dataframe_merge([nm1.peak_run, nm1.peak, nm2.peak, lsn_peak.peak])
+        # self.append_metadata(peak)
 
-        self.append_metrics_locally_sparse_noise(self.metrics_c['cell'], lsn_peak)
-        self.append_metrics_natural_movie_one(self.metrics_c['cell'], nm1)
-        self.append_metrics_natural_movie_two(self.metrics_c['cell'], nm2)
-        self.append_experiment_metrics(self.metrics_c['experiment'])
-        self.metrics_c['cell']['roi_id'] = nm1.roi_id
+        # self.append_metrics_locally_sparse_noise(self.metrics_c['cell'], lsn_peak)
+        # self.append_metrics_natural_movie_one(self.metrics_c['cell'], nm1)
+        # self.append_metrics_natural_movie_two(self.metrics_c['cell'], nm2)
+        # self.append_experiment_metrics(self.metrics_c['experiment'])
+        # self.metrics_c['cell']['roi_id'] = nm1.roi_id
 
         if save_flag:
-            self.save_session_c2(lsn4, lsn8, nm1, nm2, peak)
+            # self.save_session_c2(lsn4, lsn8, nm1, nm2, peak)
+            self.save_session_c2(lsn4, lsn8, nm1, nm2, None)
 
         if plot_flag:
             cp._plot_3sc(lsn4, nm1, nm2, self.save_dir, '_4deg')
