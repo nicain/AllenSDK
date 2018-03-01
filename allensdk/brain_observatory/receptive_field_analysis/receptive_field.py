@@ -33,7 +33,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 #
-from .eventdetection import detect_events
+from .eventdetection import detect_events_L0
 from statsmodels.sandbox.stats.multicomp import multipletests
 import numpy as np
 from .utilities import get_A, get_A_blur, get_shuffle_matrix, get_components, dict_generator
@@ -63,7 +63,7 @@ def compute_receptive_field(data, cell_index, stimulus, **kwargs):
 
     alpha = kwargs.pop('alpha')
 
-    event_vector = detect_events(data, cell_index, stimulus)
+    event_vector = detect_events_L0(data, cell_index, stimulus)
 
     A_blur = get_A_blur(data, stimulus)
     number_of_pixels = A_blur.shape[0] // 2

@@ -425,6 +425,12 @@ class LocallySparseNoise(StimulusAnalysis):
 
         attr_list = []
         file_handle = h5py.File(new_nwb.nwb_file, 'a')
+
+        # When debugging, I like to comment out all the slow sweep stuff.  In this case, this group is never made.  
+        #     Here, I make it if it doesn't exist; should be backwards compatible.
+        if 'analysis' not in file_handle:               
+            file_handle.create_group('analysis')
+
         if prefix in file_handle['analysis']:
             del file_handle['analysis'][prefix]
         f = file_handle.create_group('analysis/%s' % prefix)
