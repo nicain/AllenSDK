@@ -36,6 +36,22 @@
 from .utilities import smooth
 import numpy as np
 import scipy.stats as sps
+import os
+
+def detect_events_L0(data, cell_index, stimulus, debug_plots=False):
+    
+    ophys_experiment_id = data.get_metadata()['ophys_experiment_id']
+
+    events = np.load(os.path.join('/allen/aibs/mat/gkocker/l0events_threshold2', 'expt_'+str(ophys_experiment_id)+'_events.npy'))[cell_index, :]
+
+    stimulus_table = data.get_stimulus_table(stimulus)
+    b = np.zeros(len(stimulus_table), dtype=np.bool)
+    for ii, (start_ind, end_ind) in enumerate(zip(stimulus_table['start'].values, stimulus_table['end'].values)):
+        
+        if events[start_ind:end_ind].max() > 0:
+            b[ii] = True
+
+    return b
 
 def detect_events(data, cell_index, stimulus, debug_plots=False):
 
